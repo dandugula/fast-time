@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Main where
+module Main (main) where
 
 import Criterion.Main
 import Time
@@ -9,8 +9,7 @@ import Data.Text as T
 
 main :: IO ()
 main = do
-  let format = "%Y-%m-%dT%k:%M:%SZ"
-      jformat = "%Y-%m-%dT%k:%M:%SZ"
+  let jformat = "%Y-%m-%dT%k:%M:%SZ"
       jformatq = "%Y-%m-%dT%k:%M:%S%QZ"
       ezFormat = "%Y-%m-%dT%k:%M:%S%Q%Ez"
       dformat = "%d%m%Y"
@@ -25,7 +24,7 @@ main = do
               , bench "parse time to Maybe UTCTime using Data.Time package" $ nf b "2022-10-02T12:22:32Z"
               , bench "fast parse time with millis to Maybe UTCTime" $ nf (Time.parseTime jformatq) "2022-10-02T12:22:32.223Z"
               , bench "parse time to Maybe millis UTCTime using Data.Time package" $ nf b "2022-10-02T12:22:32.223Z"
-              , bench "fast parse day to Maybe UTCTime" $ nf (Time.parseTime "%Y-%m %d") "2022-10-02"
+              , bench "fast parse day  to Maybe UTCTime" $ nf (Time.parseTime "%Y-%m %d") "2022-10-02"
               , bench "parse day using the Data.Time package" $ nf y "2022-10-02"
               , bench "fast parse time to Maybe LocalTime" $ nf (Time.parseLTime ezFormat)  "2020-09-10T16:01:41.395+05:30"
               , bench "parse time to Maybe LocalTime using Data.Time package" $ nf c "2020-09-10T16:01:41.395+05:30"
