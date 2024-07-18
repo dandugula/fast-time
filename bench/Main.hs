@@ -19,13 +19,13 @@ main = do
       b str = parseTimeM True DTF.defaultTimeLocale (T.unpack jformatq) str :: Maybe UTCTime
       c str = parseTimeM True DTF.defaultTimeLocale (T.unpack ezFormat) str :: Maybe LocalTime
       x str = parseTimeM True DTF.defaultTimeLocale dformat str :: Maybe UTCTime
-      y str = parseTimeM True DTF.defaultTimeLocale dformat2 str :: Maybe UTCTime 
+      y str = parseTimeM True DTF.defaultTimeLocale dformat2 str :: Maybe UTCTime
       z str = parseTimeM True DTF.defaultTimeLocale dformat3 str :: Maybe UTCTime
   defaultMain [ bench "fast parse time to Maybe UTCTime" $ nf (Time.parseTime jformat) "2022-10-02T12:22:32Z"
               , bench "parse time to Maybe UTCTime using Data.Time package" $ nf b "2022-10-02T12:22:32Z"
               , bench "fast parse time with millis to Maybe UTCTime" $ nf (Time.parseTime jformatq) "2022-10-02T12:22:32.223Z"
               , bench "parse time to Maybe millis UTCTime using Data.Time package" $ nf b "2022-10-02T12:22:32.223Z"
-              , bench "fast parse day  to Maybe UTCTime" $ nf (Time.parseTime "%Y-%m %d") "2022-10-02"
+              , bench "fast parse day to Maybe UTCTime" $ nf (Time.parseTime "%Y-%m %d") "2022-10-02"
               , bench "parse day using the Data.Time package" $ nf y "2022-10-02"
               , bench "fast parse time to Maybe LocalTime" $ nf (Time.parseLTime ezFormat)  "2020-09-10T16:01:41.395+05:30"
               , bench "parse time to Maybe LocalTime using Data.Time package" $ nf c "2020-09-10T16:01:41.395+05:30"
