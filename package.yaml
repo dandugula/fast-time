@@ -24,6 +24,7 @@ dependencies:
   - flatparse
   - text
   - time
+  - bytestring
 
 ghc-options:
   - -Wall

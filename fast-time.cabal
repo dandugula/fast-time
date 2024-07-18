@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.35.1.
+-- This file has been generated from package.yaml by hpack version 0.36.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -36,10 +36,10 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , flatparse
     , text
     , time
-    , bytestring
   default-language: Haskell2010
 
 executable fast-time-bench
@@ -51,12 +51,12 @@ executable fast-time-bench
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -O2 -with-rtsopts=-N1
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , criterion
     , fast-time
     , flatparse
     , text
     , time
-    , bytestring
   default-language: Haskell2010
 
 executable fast-time-exe
@@ -68,6 +68,7 @@ executable fast-time-exe
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -O2 -with-rtsopts=-N1
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , fast-time
     , flatparse
     , text
@@ -84,9 +85,9 @@ test-suite fast-time-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -O2 -with-rtsopts=-N1
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , fast-time
     , flatparse
     , text
     , time
-    , bytestring
   default-language: Haskell2010
