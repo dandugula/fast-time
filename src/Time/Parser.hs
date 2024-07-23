@@ -21,7 +21,8 @@ parserLocalTime = do
   (year, month, day, hr, minutes, sec, msec, curLen) <- basicParserUtil
   let curLen' = if curLen < 0 then 0
                 else curLen
-      sec'    = (fromIntegral sec :: Pico) + ((fromIntegral msec :: Pico) / (10 ^ curLen' :: Pico))
+      sec'    = (fromIntegral sec :: Pico) +
+                ((fromIntegral msec :: Pico) / (10 ^ curLen' :: Pico))
   pure $
     LocalTime
       (fromGregorian year month day)
@@ -33,7 +34,8 @@ parserUTCTime = do
   pure $
    UTCTime
       (fromGregorian year month day)
-      (picosecondsToDiffTime (((hr * 60 * 60)  + (minutes * 60) + sec) * (10 ^ 12) + (msec * (10 ^ (12 - curLen)))))
+      (picosecondsToDiffTime (((hr * 60 * 60)  + (minutes * 60) + sec) *
+                             (10 ^ 12) + (msec * (10 ^ (12 - curLen)))))
 
 dayParser :: Parser e UTCTime
 dayParser = do
@@ -43,7 +45,7 @@ dayParser = do
       (fromGregorian year month day)
       (secondsToDiffTime 0)
 
--- Added parser for handling date for this format --> "%d%m%Y" 
+-- Added parser for handling date for this format --> "%d%m%Y"
 dayParser' :: Parser e UTCTime
 dayParser' = do
   day <- isolate 2 readDayOfMonth
@@ -58,9 +60,9 @@ dayParser' = do
 dateParser :: Parser e (Integer, Int, Int)
 dateParser = do
   year <- readYear
-  satisfy (\x -> x == '-' || x == ' ' || x == '/')
+  _ <- satisfy (\x -> x == '-' || x == ' ' || x == '/')
   month <- readMonthOfYear
-  satisfy (\x -> x == '-' || x == ' ' || x == '/')
+  _ <- satisfy (\x -> x == '-' || x == ' ' || x == '/')
   day <- readDayOfMonth
   pure (year, month, day)
 
@@ -68,8 +70,8 @@ dateParser = do
 basicParserUtil :: Parser e (Integer, Int, Int, Integer, Integer, Integer, Integer, Int)
 basicParserUtil = do
   (year, month, day) <- dateParser
-  satisfy (\x -> x == '-' || x == ' ' || x == 'T')
-  many $(char ' ')
+  _ <- satisfy (\x -> x == '-' || x == ' ' || x == 'T')
+  _ <- many $(char ' ')
   hr <- readInteger
   $(char ':')
   minutes <- readInteger

@@ -17,21 +17,21 @@ parseTime format stringifiedDate = go $ runParser parser (B.pack stringifiedDate
   where
     parser
       | format == "%Y-%m-%dT%k:%M:%SZ" ||
-          format == "%Y-%m-%dT%k:%M:%S%QZ" ||
-          format == "%Y-%m-%d %k:%M:%S%Q" || format == "%Y-%m-%d %k:%M:%S" =
+        format == "%Y-%m-%dT%k:%M:%S%QZ" ||
+        format == "%Y-%m-%d %k:%M:%S%Q" || format == "%Y-%m-%d %k:%M:%S" =
         parserUTCTime
       | format == "%Y-%m-%d" ||
-          format == "%Y %m %d" || format == "%Y-%m %d" || format == "%Y %m-%d" || format == "%Y/%-m/%-d" =
+        format == "%Y %m %d" || format == "%Y-%m %d" || format == "%Y %m-%d" || format == "%Y/%-m/%-d" =
         dayParser
       | format == "%d%m%Y" = dayParser'
       | otherwise = parserUTCTime
     go (OK r _) = Just r
     go _ = Nothing
 
-parseLTime :: Text -> String -> Maybe LocalTime 
+parseLTime :: Text -> String -> Maybe LocalTime
 parseLTime format stringifiedDate = go $ runParser parser (B.pack stringifiedDate)
   where
-    parser 
+    parser
       |  format == "%Y-%m-%dT%k:%M:%S%Q%Ez" =
         parserLocalTime
       | otherwise = parserLocalTime
